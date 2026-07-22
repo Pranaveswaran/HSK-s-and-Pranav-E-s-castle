@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HSK's Castle</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-container">
+    <h1>🏰 HSK'S CASTLE 🏰</h1>
+    
+    <div class="stats-panel">
+      <div class="stat"><span>Year:</span> <strong id="stat-year">1</strong> / 25</div>
+      <div class="stat"><span>💰 Gold:</span> <strong id="stat-gold">500</strong></div>
+      <div class="stat"><span>🍖 Food:</span> <strong id="stat-food">400</strong></div>
+      <div class="stat"><span>👥 Population:</span> <strong id="stat-pop">100</strong></div>
+      <div class="stat"><span>⚔️ Army:</span> <strong id="stat-army">30</strong></div>
+      <div class="stat"><span>😊 Happiness:</span> <strong id="stat-happy">70</strong></div>
+    </div>
+
+    <div id="log-window" class="log-window"></div>
+
+    <div id="action-panel" class="action-panel">
+      <button onclick="handleChoice(1)">1. Collect Taxes 💰</button>
+      <button onclick="handleChoice(2)">2. Buy Food 🍖</button>
+      <button onclick="handleChoice(3)">3. Train Army ⚔️</button>
+      <button onclick="handleChoice(4)">4. Build Houses 🏠</button>
+      <button onclick="handleChoice(5)">5. Hold Festival 🎉</button>
+    </div>
+
+    <div id="event-panel" class="event-panel hidden">
+      <input type="text" id="event-input" placeholder="Type your answer here..." autocomplete="off">
+      <button id="event-submit">Submit</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
