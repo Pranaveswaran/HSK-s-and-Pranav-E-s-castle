@@ -39,43 +39,39 @@ function handleChoice(action) {
   log(`🌅 YEAR ${year} CHOICE:`);
 
   if (action === 1) {
-    let oldG = gold, oldP = population, oldH = happiness;
     gold += Math.round(population * 2);
     population = Math.round(population * 0.95);
     happiness = Math.round(happiness * 0.78);
-    log(`💰 Collected ${gold - oldG} gold from taxes.`);
-    log(`👥 ${oldP - population} citizens left.`);
-    log(`😊 Happiness decreased by ${oldH - happiness}.`);
+    log(`💰 Total Gold: ${gold}`);
+    log(`👥 Total Population: ${population}`);
+    log(`😊 Total Happiness: ${happiness}`);
   } else if (action === 2) {
-    let oldG = gold, oldP = population;
     food += 350;
     population = Math.round(population * 1.12);
     gold -= 200;
-    log(`🍖 Purchased food supplies.`);
-    log(`👥 Population increased by ${population - oldP}.`);
-    log(`💰 Spent ${oldG - gold} gold.`);
+    log(`🍖 Purchased food supplies! Total Food: ${food}`);
+    log(`👥 Total Population: ${population}`);
+    log(`💰 Total Gold: ${gold}`);
   } else if (action === 3) {
-    let oldA = army, oldG = gold, oldH = happiness;
     army = Math.round(army * 1.5);
     gold = Math.round(gold * 0.8);
     happiness += 10;
-    log(`⚔️ Army grew by ${army - oldA} soldiers.`);
-    log(`💰 Spent ${oldG - gold} gold.`);
-    log(`😊 Happiness grew by ${happiness - oldH}.`);
+    log(`⚔️ Total Army: ${army}`);
+    log(`💰 Total Gold: ${gold}`);
+    log(`😊 Total Happiness: ${happiness}`);
   } else if (action === 4) {
-    let oldP = population, oldG = gold, oldH = happiness;
     population = population >= 100 ? Math.round(population * 1.8) : population + 60;
     gold = Math.round(gold * 0.7);
     happiness += 30;
-    log(`🏠 Population grew by ${population - oldP}.`);
-    log(`💰 Spent ${oldG - gold} gold.`);
-    log(`😊 Happiness increased by ${happiness - oldH}.`);
+    log(`🏠 Total Population: ${population}`);
+    log(`💰 Total Gold: ${gold}`);
+    log(`😊 Total Happiness: ${happiness}`);
   } else if (action === 5) {
-    let oldH = happiness;
     happiness = happiness <= 80 ? Math.round(happiness + 60) : Math.round(happiness * 1.8);
     gold -= 150;
     log(`🎉 Held a legendary festival!`);
-    log(`😊 Happiness increased by ${happiness - oldH}.`);
+    log(`😊 Total Happiness: ${happiness}`);
+    log(`💰 Total Gold: ${gold}`);
   }
 
   // End-of-year calculations
@@ -97,16 +93,16 @@ function applyMigrationAndFood() {
   if (popRand === 1) {
     let mig = Math.floor(Math.random() * (population * 0.33)) + 1;
     population += mig;
-    log(`👥 Population increased by ${mig} due to migration.`);
+    log(`👥 Population migrated in. Total Population: ${population}`);
   } else {
     let mig = Math.floor(Math.random() * (population * 0.25)) + 1;
     population -= mig;
-    log(`👥 Population decreased by ${mig} due to migration.`);
+    log(`👥 Population migrated away. Total Population: ${population}`);
   }
 
-  let oldF = food;
-  food = Math.round(food - population / 2);
-  log(`🍖 Food supplies reduced by ${oldF - food}.`);
+  // Reduced food consumption rate from (population / 2) to (population / 10)
+  food = Math.round(food - population / 10);
+  log(`🍖 Current Food remaining: ${food}`);
 }
 
 function advanceYear() {
@@ -137,7 +133,6 @@ function triggerRandomEvent() {
   if (eventId === 1) {
     log("☠️ ZOMBIE APOCALYPSE!");
     log("Zombies attack! Defend your kingdom by solving math problems using the event box below.");
-    // Prompting event via alert/prompt for simple input handling
     let score = 0;
     for (let i = 0; i < 4; i++) {
       let a = Math.floor(Math.random() * 100) + 1;
@@ -150,6 +145,7 @@ function triggerRandomEvent() {
     } else {
       log("☠️ The zombies breached the walls! Major damage taken.");
       happiness -= 40; population -= 50; food -= 50; army -= 10;
+      log(`📊 Current Stats -> Pop: ${population}, Army: ${army}, Food: ${food}, Happiness: ${happiness}`);
     }
   } else if (eventId === 2) {
     log("⛏️ GOLD MINE FOUND!");
@@ -160,6 +156,7 @@ function triggerRandomEvent() {
       if (guess === target) {
         log("🥭 Mango Tree blessing! Resources multiplied!");
         gold *= 2; happiness *= 1.2;
+        log(`💰 Total Gold: ${gold}, 😊 Total Happiness: ${happiness}`);
       } else {
         log("The Mango Tree was unimpressed...");
       }
@@ -169,6 +166,7 @@ function triggerRandomEvent() {
       if (guess === target) {
         log("🌟 LEGENDARY DISCOVERY! Resources heavily boosted!");
         gold *= 5; food *= 3;
+        log(`💰 Total Gold: ${gold}, 🍖 Total Food: ${food}`);
       } else {
         log("The magic vanished...");
       }
@@ -179,9 +177,11 @@ function triggerRandomEvent() {
     if (seaList.map(s => s.toLowerCase()).includes(item.toLowerCase())) {
       log("🚢 Excellent knowledge! You saved the crew.");
       happiness += 20;
+      log(`😊 Total Happiness: ${happiness}`);
     } else {
       log("💀 The ship sank... lost population and gold.");
       population -= 40; gold -= 100;
+      log(`👥 Total Population: ${population}, 💰 Total Gold: ${gold}`);
     }
   } else if (eventId === 4) {
     log("🥭 TRAPPED IN A MANGO HOLE!");
@@ -193,6 +193,7 @@ function triggerRandomEvent() {
     } else {
       log("Uh oh! Failed to escape. Resources lost.");
       food -= 50; population -= 20;
+      log(`🍖 Total Food: ${food}, 👥 Total Population: ${population}`);
     }
   }
 
