@@ -31,7 +31,7 @@ function logSeparator() {
 
 // Initial Greeting
 log("🏰 Welcome to HSK'S CASTLE 🏰");
-log("Survive 25 years and build the greatest kingdom ever!\n");
+log("Survive 33 years and build the greatest kingdom ever!\n");
 updateStats();
 
 function handleChoice(action) {
