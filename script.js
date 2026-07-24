@@ -107,7 +107,7 @@ function applyMigrationAndFood() {
 
 function advanceYear() {
   year++;
-  if (year > 25) {
+  if (year > 33) {
     logSeparator();
     log("🏰 25 YEARS HAVE PASSED! YOU SURVIVED AND REIGNED SUPREME!");
     document.getElementById("action-panel").classList.add("hidden");
